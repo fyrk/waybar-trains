@@ -1,15 +1,19 @@
 import json
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any
 
 from .base import BaseProvider
 from .types import DelayedTime, Status, Stop
+from .utils import is_connected_to_ssid
 
 
 class ODEGProvider(BaseProvider):
     @property
     def name(self):
         return "odeg"
+
+    def _is_connected(self) -> bool:
+        return is_connected_to_ssid({"ODEG Free WiFi"})
 
     def _fetch_data(self) -> Any:
         with open("_data/2024-04-13-20-20-00-odeg-re1/graphql.json") as f:

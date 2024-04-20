@@ -22,10 +22,10 @@ class BaseProvider(ABC):
     @abstractmethod
     def _get_status_from_data(self, data: Any) -> Status | None: ...
 
-    def get_status(self) -> Status | None:
+    def get_status(self, conn_check=True) -> Status | None:
         """
         tries to fetch provider data, and if successful returns a status string, else None
         """
-        if not self._is_connected():
+        if conn_check and not self._is_connected():
             return None
         return self._get_status_from_data(self._fetch_data())
