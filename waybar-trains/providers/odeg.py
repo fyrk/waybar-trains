@@ -43,8 +43,8 @@ class ODEGProvider(BaseProvider):
                     stop.get("arrivalDelay"),
                 ),
                 departure=DelayedTime.from_iso(
-                    stop.get("arrivalPlanned"),
-                    stop.get("arrivalDelay"),
+                    stop.get("departurePlanned"),
+                    stop.get("departureDelay"),
                 ),
             )
 
