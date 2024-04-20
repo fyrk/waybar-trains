@@ -62,7 +62,7 @@ class Stop:
         return self.to_str()
 
     def to_str(self):
-        if self.arrival and self.departure:
+        if self.arrival and self.departure and self.arrival != self.departure:
             time = f"{self.arrival} – {self.departure}"
         elif time_value := self.arrival or self.departure:
             time = str(time_value)
