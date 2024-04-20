@@ -1,5 +1,5 @@
 {
-  description = "A basic flake with a shell";
+  description = "display information from a train's WiFi network on your Waybar";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
@@ -10,7 +10,12 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          packages = [ pkgs.bashInteractive ];
+          packages = with pkgs; [
+            pkgs.bashInteractive
+
+            python311
+            python311Packages.pyroute2
+          ];
         };
       });
 }
