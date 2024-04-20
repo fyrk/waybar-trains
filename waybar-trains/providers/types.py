@@ -59,9 +59,6 @@ class Stop:
     track: str | None = None
 
     def __str__(self):
-        return self.to_str()
-
-    def to_str(self):
         if self.arrival and self.departure and self.arrival != self.departure:
             time = f"{self.arrival} – {self.departure}"
         elif time_value := self.arrival or self.departure:
@@ -102,4 +99,12 @@ class Status:
             return f"{line}{dest}{speed}".strip()
 
     def get_tooltip(self):
-        pass
+        lines = []
+        # show next stops
+        reached_next = False
+        for stop in self.stops:
+            if stop == self.next_stop:
+                reached_next = True
+            if reached_next:
+                lines.append(str(stop))
+        return "\n".join(lines)
