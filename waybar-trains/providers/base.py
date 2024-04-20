@@ -1,12 +1,21 @@
 from abc import ABC, abstractmethod
+from logging import Logger, LoggerAdapter
+from pprint import pformat
 from typing import Any
 
 from .types import Status
 
 
+class ProviderLoggingAdapter(LoggerAdapter):
+    def process(self, msg, kwargs):
+        name = self.extra["name"]  # type:ignore[reportOptionalSubscript]
+        return "[%s] %s" % (name, msg), kwargs
+
+
 class BaseProvider(ABC):
-    def __init__(self):
+    def __init__(self, logger: Logger):
         super().__init__()
+        self.logger = ProviderLoggingAdapter(logger, {"name": self.name})
 
     @property
     @abstractmethod
@@ -26,6 +35,13 @@ class BaseProvider(ABC):
         """
         tries to fetch provider data, and if successful returns a status string, else None
         """
-        if conn_check and not self._is_connected():
-            return None
-        return self._get_status_from_data(self._fetch_data())
+        try:
+            self.logger.info(f"Getting status")
+            if conn_check and not self._is_connected():
+                self.logger.debug("Skipping, not connected to WiFi")
+                return None
+            data = self._fetch_data()
+            self.logger.debug(f"Got data {pformat(data)}")
+            return self._get_status_from_data(data)
+        except:
+            self.logger.exception(f"Unhandled exception while retrieving status")
