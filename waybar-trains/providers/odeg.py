@@ -9,6 +9,172 @@ from .types import DelayedTime, Status, Stop
 from .utils import is_connected_to_ssid
 
 
+_ODEG_QUERY = """
+query feed_widget($user_session_id: ID, $ap_mac: String, $widget_id: ID!, $language: String) {
+  feed_widget(
+    user_session_id: $user_session_id
+    ap_mac: $ap_mac
+    widget_id: $widget_id
+    language: $language
+  ) {
+    user_session_id
+    error {
+      ...Error
+      __typename
+    }
+    widget {
+      ...Widget
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment Error on Error {
+  error_code
+  error_message
+  __typename
+}
+
+fragment Widget on Widget {
+  widget_id
+  page_id
+  position
+  date_updated
+  ... on SimpleTextWidget {
+    is_ready
+    ...SimpleTextWidget
+    __typename
+  }
+  ... on ConnectWidget {
+    button_text
+    connected_text
+    variant
+    confirmation
+    delay
+    require_sms_auth
+    email_mandatory
+    terms_of_service
+    store_terms
+    enable_anchor
+    anchor {
+      ...Anchor
+      __typename
+    }
+    __typename
+  }
+  ... on JourneyInfoWidget {
+    json
+    enable_anchor
+    anchor {
+      ...Anchor
+      __typename
+    }
+    variant
+    is_ready
+    hold_text
+    __typename
+  }
+  ... on StructuredTextWidget {
+    is_ready
+    categories {
+      ...StructuredTextCategory
+      __typename
+    }
+    __typename
+  }
+  ... on SupportFormWidget {
+    custom_options {
+      option_key
+      text
+      email
+      __typename
+    }
+    __typename
+  }
+  ... on Wifi4EUWidget {
+    self_test
+    network_identifier
+    __typename
+  }
+  ... on EmergencyRequestWidget {
+    reasons {
+      reason
+      __typename
+    }
+    disclaimer
+    status
+    __typename
+  }
+  ... on MovingMapWidget {
+    is_ready
+    icon
+    geo_points {
+      icon_width
+      icon_url
+      lat
+      long
+      text
+      __typename
+    }
+    json
+    __typename
+  }
+  __typename
+}
+
+fragment Anchor on Anchor {
+  slug
+  label
+  __typename
+}
+
+fragment SimpleTextWidget on SimpleTextWidget {
+  content
+  enable_anchor
+  anchor {
+    ...Anchor
+    __typename
+  }
+  __typename
+}
+
+fragment StructuredTextCategory on StructuredTextCategory {
+  label
+  entries {
+    ...StructuredTextEntry
+    __typename
+  }
+  enable_anchor
+  anchor {
+    ...Anchor
+    __typename
+  }
+  __typename
+}
+
+fragment StructuredTextEntry on StructuredTextEntry {
+  title
+  content
+  POI_match {
+    ...PoiMatch
+    __typename
+  }
+  __typename
+}
+
+fragment PoiMatch on PoiMatch {
+  stop {
+    name
+    id
+    ds100
+    ibnr
+    __typename
+  }
+  __typename
+}"""
+
+
 class ODEGProvider(BaseProvider):
     @property
     def name(self):
@@ -27,7 +193,7 @@ class ODEGProvider(BaseProvider):
                     "language": "en",
                     "user_session_id": "e9fba063-7f3b-4131-adfc-6ce562855be1",
                 },
-                "query": "query feed_widget($user_session_id: ID, $ap_mac: String, $widget_id: ID!, $language: String) {\n  feed_widget(\n    user_session_id: $user_session_id\n    ap_mac: $ap_mac\n    widget_id: $widget_id\n    language: $language\n  ) {\n    user_session_id\n    error {\n      ...Error\n      __typename\n    }\n    widget {\n      ...Widget\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment Error on Error {\n  error_code\n  error_message\n  __typename\n}\n\nfragment Widget on Widget {\n  widget_id\n  page_id\n  position\n  date_updated\n  ... on SimpleTextWidget {\n    is_ready\n    ...SimpleTextWidget\n    __typename\n  }\n  ... on ConnectWidget {\n    button_text\n    connected_text\n    variant\n    confirmation\n    delay\n    require_sms_auth\n    email_mandatory\n    terms_of_service\n    store_terms\n    enable_anchor\n    anchor {\n      ...Anchor\n      __typename\n    }\n    __typename\n  }\n  ... on JourneyInfoWidget {\n    json\n    enable_anchor\n    anchor {\n      ...Anchor\n      __typename\n    }\n    variant\n    is_ready\n    hold_text\n    __typename\n  }\n  ... on StructuredTextWidget {\n    is_ready\n    categories {\n      ...StructuredTextCategory\n      __typename\n    }\n    __typename\n  }\n  ... on SupportFormWidget {\n    custom_options {\n      option_key\n      text\n      email\n      __typename\n    }\n    __typename\n  }\n  ... on Wifi4EUWidget {\n    self_test\n    network_identifier\n    __typename\n  }\n  ... on EmergencyRequestWidget {\n    reasons {\n      reason\n      __typename\n    }\n    disclaimer\n    status\n    __typename\n  }\n  ... on MovingMapWidget {\n    is_ready\n    icon\n    geo_points {\n      icon_width\n      icon_url\n      lat\n      long\n      text\n      __typename\n    }\n    json\n    __typename\n  }\n  __typename\n}\n\nfragment Anchor on Anchor {\n  slug\n  label\n  __typename\n}\n\nfragment SimpleTextWidget on SimpleTextWidget {\n  content\n  enable_anchor\n  anchor {\n    ...Anchor\n    __typename\n  }\n  __typename\n}\n\nfragment StructuredTextCategory on StructuredTextCategory {\n  label\n  entries {\n    ...StructuredTextEntry\n    __typename\n  }\n  enable_anchor\n  anchor {\n    ...Anchor\n    __typename\n  }\n  __typename\n}\n\nfragment StructuredTextEntry on StructuredTextEntry {\n  title\n  content\n  POI_match {\n    ...PoiMatch\n    __typename\n  }\n  __typename\n}\n\nfragment PoiMatch on PoiMatch {\n  stop {\n    name\n    id\n    ds100\n    ibnr\n    __typename\n  }\n  __typename\n}",
+                "query": _ODEG_QUERY,
             },
         )
         widget = json.loads(response.json()["data"]["feed_widget"]["widget"]["json"])
