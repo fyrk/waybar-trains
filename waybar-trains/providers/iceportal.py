@@ -1,10 +1,16 @@
-import json
 import socket
-from typing import Any
+from typing import NamedTuple
+
+import requests
 
 from .base import BaseProvider
 from .types import DelayedTime, Status, Stop
 from .utils import is_connected_to_ssid
+
+
+class IceportalData(NamedTuple):
+    trip: dict
+    status: dict
 
 
 class IceportalProvider(BaseProvider):
@@ -26,14 +32,13 @@ class IceportalProvider(BaseProvider):
         )[0][4][0]
         return ip.startswith("172.")
 
-    def _fetch_data(self) -> Any:
-        with open("_data/2021-08-31-12-02-55-ice1601/trip.json") as f:
-            trip = json.load(f)
-        with open("_data/2021-08-31-12-02-55-ice1601/status.json") as f:
-            status = json.load(f)
-        return {"trip": trip, "status": status}
+    def _fetch_data(self) -> IceportalData:
+        return IceportalData(
+            trip=requests.get("https://iceportal.de/api1/rs/tripInfo/trip").json(),
+            status=requests.get("https://iceportal.de/api1/rs/status").json(),
+        )
 
-    def _get_status_from_data(self, data: Any) -> Status | None:
+    def _get_status_from_data(self, data: IceportalData) -> Status | None:
         def json_to_stop(stop: dict):
             station = stop["station"]
             timetable = stop["timetable"]
@@ -50,8 +55,8 @@ class IceportalProvider(BaseProvider):
                 id=station["evaNr"],
             )
 
-        trip = data["trip"]["trip"]
-        status = data["status"]
+        trip = data.trip["trip"]
+        status = data.status
 
         stops = [json_to_stop(stop) for stop in trip["stops"]]
         next_stop_id = trip["stopInfo"]["actualNext"]
