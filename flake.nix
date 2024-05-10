@@ -13,9 +13,10 @@
           packages = with pkgs; [
             pkgs.bashInteractive
 
-            python311
-            python311Packages.requests
-            python311Packages.pyroute2
+            (python312.withPackages (ps: with ps; [
+              requests
+              pyroute2
+            ]))
           ];
         };
       });
