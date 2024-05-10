@@ -17,14 +17,14 @@ class IceportalProvider(BaseProvider):
             return False
 
         # check if iceportal.de with local ip address is really available
-        # idea fromhttps://github.com/liclac/ambient/blob/75e1d3aee4c1c5ba55d95cf9e14e39afb24879b1/functions.d/ambient_resolve4.fish
+        # idea from https://github.com/liclac/ambient/blob/75e1d3aee4c1c5ba55d95cf9e14e39afb24879b1/functions.d/ambient_resolve4.fish
         ip = socket.getaddrinfo(
             host="iceportal.de",
             port=443,
             family=socket.AF_INET,
             proto=socket.IPPROTO_TCP,
         )[0][4][0]
-        return ip.startswith("127.")
+        return ip.startswith("172.")
 
     def _fetch_data(self) -> Any:
         with open("_data/2021-08-31-12-02-55-ice1601/trip.json") as f:
