@@ -1,0 +1,607 @@
+{
+  "name": "RE 1",
+  "no": "4430",
+  "journeyId": "0dd08199-cea9-329b-9977-2e9a94c45caf",
+  "tenantId": "niedersachsen",
+  "administrationId": "800295",
+  "operatorName": "DB Regio N, RE Kreuz Bremen",
+  "operatorCode": "DB",
+  "category": "RE",
+  "type": "REGIONAL_TRAIN",
+  "date": "2024-05-10T19:20:00+02:00",
+  "stops": [
+    {
+      "status": "Normal",
+      "departureId": "ecce5021-577f-3c44-931e-fbf62a931b42",
+      "station": {
+        "evaNo": "8000152",
+        "name": "Hannover Hbf",
+        "position": { "latitude": 52.376761, "longitude": 9.741021 }
+      },
+      "track": { "target": "12", "prediction": "12" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T19:20:00+02:00",
+        "predicted": "2024-05-10T19:24:42+02:00",
+        "diff": 5,
+        "targetTimeInMs": 1715361600000,
+        "predictedTimeInMs": 1715361882000,
+        "timeType": "REAL"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "ca0ec9a1-fd5a-3c10-a3d7-3100bce171ff",
+      "departureId": "98efea84-56c5-3aa1-9545-7a25bb01624a",
+      "station": {
+        "evaNo": "8000268",
+        "name": "Wunstorf",
+        "position": { "latitude": 52.422225, "longitude": 9.450976 }
+      },
+      "track": { "target": "3", "prediction": "3" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T19:33:00+02:00",
+        "predicted": "2024-05-10T19:37:00+02:00",
+        "diff": 4,
+        "targetTimeInMs": 1715362380000,
+        "predictedTimeInMs": 1715362620000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T19:33:00+02:00",
+        "predicted": "2024-05-10T19:36:27+02:00",
+        "diff": 3,
+        "targetTimeInMs": 1715362380000,
+        "predictedTimeInMs": 1715362587000,
+        "timeType": "REAL"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "83ba51bc-8703-34b9-a74f-07dfaf286d3f",
+      "departureId": "47e5503e-4814-3cc5-bb88-1fe4f7b56718",
+      "station": {
+        "evaNo": "8004322",
+        "name": "Neustadt am Rübenberge",
+        "position": { "latitude": 52.503325, "longitude": 9.455277 }
+      },
+      "track": { "target": "1", "prediction": "1" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T19:40:00+02:00",
+        "predicted": "2024-05-10T19:43:00+02:00",
+        "diff": 3,
+        "targetTimeInMs": 1715362800000,
+        "predictedTimeInMs": 1715362980000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T19:39:00+02:00",
+        "predicted": "2024-05-10T19:43:00+02:00",
+        "diff": 4,
+        "targetTimeInMs": 1715362740000,
+        "predictedTimeInMs": 1715362980000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "e1fae3a0-7def-392c-8e00-4c1a4430c5c4",
+      "departureId": "84e90e32-1440-3e1e-8c33-965c65b5b8a5",
+      "station": {
+        "evaNo": "8000279",
+        "name": "Nienburg(Weser)",
+        "position": { "latitude": 52.645566, "longitude": 9.217753 }
+      },
+      "track": { "target": "2", "prediction": "2" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T19:54:00+02:00",
+        "predicted": "2024-05-10T19:55:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715363640000,
+        "predictedTimeInMs": 1715363700000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T19:54:00+02:00",
+        "predicted": "2024-05-10T19:54:00+02:00",
+        "diff": 0,
+        "targetTimeInMs": 1715363640000,
+        "predictedTimeInMs": 1715363640000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "b2be6542-1d24-3164-9d84-be0664d22772",
+      "departureId": "d1289a56-246f-3875-b535-d716ff2781cc",
+      "station": {
+        "evaNo": "8001949",
+        "name": "Eystrup",
+        "position": { "latitude": 52.783369, "longitude": 9.23139 }
+      },
+      "track": { "target": "3", "prediction": "3" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T20:03:00+02:00",
+        "predicted": "2024-05-10T20:05:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715364180000,
+        "predictedTimeInMs": 1715364300000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T20:03:00+02:00",
+        "predicted": "2024-05-10T20:04:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715364180000,
+        "predictedTimeInMs": 1715364240000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "ffe42872-f042-3916-a5c3-003e09efc02d",
+      "departureId": "e839eefb-e625-3318-9704-c6b8e7c07f7b",
+      "station": {
+        "evaNo": "8001489",
+        "name": "Dörverden",
+        "position": { "latitude": 52.846407, "longitude": 9.246334 }
+      },
+      "track": { "target": "4", "prediction": "4" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T20:09:00+02:00",
+        "predicted": "2024-05-10T20:11:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715364540000,
+        "predictedTimeInMs": 1715364660000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T20:09:00+02:00",
+        "predicted": "2024-05-10T20:10:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715364540000,
+        "predictedTimeInMs": 1715364600000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "2ab93d8b-bd21-33b3-a6df-b808823e6710",
+      "departureId": "f6ce7403-9162-3b4b-89e3-f53a7eeb0160",
+      "station": {
+        "evaNo": "8006076",
+        "name": "Verden(Aller)",
+        "position": { "latitude": 52.920818, "longitude": 9.237855 }
+      },
+      "track": { "target": "2", "prediction": "2" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T20:15:00+02:00",
+        "predicted": "2024-05-10T20:17:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715364900000,
+        "predictedTimeInMs": 1715365020000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T20:15:00+02:00",
+        "predicted": "2024-05-10T20:16:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715364900000,
+        "predictedTimeInMs": 1715364960000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "d99224dc-083b-3ece-b1fd-c07cc88b87af",
+      "departureId": "3572eaa5-818f-395a-b066-98218c2dc8b5",
+      "station": {
+        "evaNo": "8000413",
+        "name": "Achim",
+        "position": { "latitude": 53.01599, "longitude": 9.030447 }
+      },
+      "track": { "target": "2", "prediction": "2" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T20:26:00+02:00",
+        "predicted": "2024-05-10T20:28:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715365560000,
+        "predictedTimeInMs": 1715365680000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T20:26:00+02:00",
+        "predicted": "2024-05-10T20:27:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715365560000,
+        "predictedTimeInMs": 1715365620000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "1c4599d1-91de-35f9-b694-c7dab81a555e",
+      "departureId": "67302cf0-6389-33a7-bc52-557cf357ead3",
+      "station": {
+        "evaNo": "8001160",
+        "name": "Bremen-Mahndorf",
+        "position": { "latitude": 53.039762, "longitude": 8.944627 }
+      },
+      "track": { "target": "2", "prediction": "2" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T20:31:00+02:00",
+        "predicted": "2024-05-10T20:33:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715365860000,
+        "predictedTimeInMs": 1715365980000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T20:31:00+02:00",
+        "predicted": "2024-05-10T20:32:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715365860000,
+        "predictedTimeInMs": 1715365920000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "1a35a96a-7cf8-356f-9baa-5447b0044494",
+      "departureId": "770a8890-3bb1-33e0-bd61-e29bd5d0b941",
+      "station": {
+        "evaNo": "8000050",
+        "name": "Bremen Hbf",
+        "position": { "latitude": 53.083481, "longitude": 8.813834 }
+      },
+      "track": { "target": "2", "prediction": "2" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T20:54:00+02:00",
+        "predicted": "2024-05-10T20:55:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715367240000,
+        "predictedTimeInMs": 1715367300000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T20:39:00+02:00",
+        "predicted": "2024-05-10T20:42:00+02:00",
+        "diff": 3,
+        "targetTimeInMs": 1715366340000,
+        "predictedTimeInMs": 1715366520000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "7788040b-31de-3de2-a580-729432b0380b",
+      "departureId": "e5a33b10-54aa-3641-b05f-4fe6190df5c2",
+      "station": {
+        "evaNo": "8000070",
+        "name": "Delmenhorst",
+        "position": { "latitude": 53.052792, "longitude": 8.629758 }
+      },
+      "track": { "target": "3", "prediction": "3" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T21:04:00+02:00",
+        "predicted": "2024-05-10T21:06:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715367840000,
+        "predictedTimeInMs": 1715367960000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T21:03:00+02:00",
+        "predicted": "2024-05-10T21:05:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715367780000,
+        "predictedTimeInMs": 1715367900000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "b397b665-06f9-3287-b97e-4b5af64267be",
+      "departureId": "300e36e1-e512-3d94-8532-97f39d93aa39",
+      "station": {
+        "evaNo": "8000522",
+        "name": "Hude",
+        "position": { "latitude": 53.109429, "longitude": 8.460956 }
+      },
+      "track": { "target": "2", "prediction": "2" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T21:12:00+02:00",
+        "predicted": "2024-05-10T21:14:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715368320000,
+        "predictedTimeInMs": 1715368440000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T21:11:00+02:00",
+        "predicted": "2024-05-10T21:13:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715368260000,
+        "predictedTimeInMs": 1715368380000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "3c756ae0-0f41-3fed-b442-f751cb3a73f5",
+      "departureId": "225b9b34-9d0c-32c7-ad4b-73ae8262209d",
+      "station": {
+        "evaNo": "8000291",
+        "name": "Oldenburg(Oldb)",
+        "position": { "latitude": 53.144323, "longitude": 8.222713 }
+      },
+      "track": { "target": "6", "prediction": "6" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T21:33:00+02:00",
+        "predicted": "2024-05-10T21:35:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715369580000,
+        "predictedTimeInMs": 1715369700000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T21:23:00+02:00",
+        "predicted": "2024-05-10T21:24:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715368980000,
+        "predictedTimeInMs": 1715369040000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "25324277-d9ba-395b-aef1-ce3ad25800c3",
+      "departureId": "f8b7ebd7-5c1c-3ff0-90bc-157e7c9c4a30",
+      "station": {
+        "evaNo": "8000770",
+        "name": "Bad Zwischenahn",
+        "position": { "latitude": 53.182547, "longitude": 8.003123 }
+      },
+      "track": { "target": "1", "prediction": "1" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T21:44:00+02:00",
+        "predicted": "2024-05-10T21:46:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715370240000,
+        "predictedTimeInMs": 1715370360000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T21:43:00+02:00",
+        "predicted": "2024-05-10T21:45:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715370180000,
+        "predictedTimeInMs": 1715370300000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "20b94877-a69d-3fb6-bf3e-e8f7824f4f7c",
+      "departureId": "94e08b8f-c9f3-3de1-95a6-4d481f361d58",
+      "station": {
+        "evaNo": "8004610",
+        "name": "Westerstede-Ocholt",
+        "position": { "latitude": 53.202166, "longitude": 7.886468 }
+      },
+      "track": { "target": "3", "prediction": "3" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T21:51:00+02:00",
+        "predicted": "2024-05-10T21:53:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715370660000,
+        "predictedTimeInMs": 1715370780000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T21:50:00+02:00",
+        "predicted": "2024-05-10T21:51:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715370600000,
+        "predictedTimeInMs": 1715370660000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "e6113ddf-8fa3-3173-89cf-41f0e6dd1811",
+      "departureId": "880d7e69-f06f-39c2-b4df-5b9ec070619b",
+      "station": {
+        "evaNo": "8000664",
+        "name": "Augustfehn",
+        "position": { "latitude": 53.22089, "longitude": 7.759659 }
+      },
+      "track": { "target": "2", "prediction": "2" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T21:58:00+02:00",
+        "predicted": "2024-05-10T22:00:00+02:00",
+        "diff": 2,
+        "targetTimeInMs": 1715371080000,
+        "predictedTimeInMs": 1715371200000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T21:58:00+02:00",
+        "predicted": "2024-05-10T21:59:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715371080000,
+        "predictedTimeInMs": 1715371140000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "1957e71f-a265-3402-b568-7107250c9e6a",
+      "departureId": "45fda563-a9cc-36ce-8ae3-324a256894a1",
+      "station": {
+        "evaNo": "8000225",
+        "name": "Leer(Ostfriesl)",
+        "position": { "latitude": 53.23165, "longitude": 7.465283 }
+      },
+      "track": { "target": "4", "prediction": "4" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T22:24:00+02:00",
+        "predicted": "2024-05-10T22:24:00+02:00",
+        "diff": 0,
+        "targetTimeInMs": 1715372640000,
+        "predictedTimeInMs": 1715372640000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T22:13:00+02:00",
+        "predicted": "2024-05-10T22:14:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715371980000,
+        "predictedTimeInMs": 1715372040000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "c6740d2d-13a8-3a44-8d8d-6cb89207a8d9",
+      "departureId": "6daef61f-327c-3051-a749-ebb4ce09ac6e",
+      "station": {
+        "evaNo": "8001768",
+        "name": "Emden Hbf",
+        "position": { "latitude": 53.369036, "longitude": 7.195176 }
+      },
+      "track": { "target": "5", "prediction": "5" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T22:42:00+02:00",
+        "predicted": "2024-05-10T22:43:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715373720000,
+        "predictedTimeInMs": 1715373780000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T22:41:00+02:00",
+        "predicted": "2024-05-10T22:41:00+02:00",
+        "diff": 0,
+        "targetTimeInMs": 1715373660000,
+        "predictedTimeInMs": 1715373660000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "cd2f8be4-8370-3d59-987e-540cd8a7fd51",
+      "departureId": "a46d3eed-26ac-3c34-a53f-2de35c447e89",
+      "station": {
+        "evaNo": "8003866",
+        "name": "Marienhafe",
+        "position": { "latitude": 53.5192358, "longitude": 7.27436006 }
+      },
+      "track": { "target": "2", "prediction": "2" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T22:58:00+02:00",
+        "predicted": "2024-05-10T22:59:00+02:00",
+        "diff": 1,
+        "targetTimeInMs": 1715374680000,
+        "predictedTimeInMs": 1715374740000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T22:58:00+02:00",
+        "predicted": "2024-05-10T22:58:00+02:00",
+        "diff": 0,
+        "targetTimeInMs": 1715374680000,
+        "predictedTimeInMs": 1715374680000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "0973f74b-0bb6-3789-9a99-74454726138e",
+      "departureId": "85a37a7f-0f4d-352b-928e-b515b392d960",
+      "station": {
+        "evaNo": "8000800",
+        "name": "Norden",
+        "position": { "latitude": 53.588196, "longitude": 7.218913 }
+      },
+      "track": { "target": "1", "prediction": "1" },
+      "messages": [],
+      "departureTime": {
+        "target": "2024-05-10T23:06:00+02:00",
+        "predicted": "2024-05-10T23:06:00+02:00",
+        "diff": 0,
+        "targetTimeInMs": 1715375160000,
+        "predictedTimeInMs": 1715375160000,
+        "timeType": "PREVIEW"
+      },
+      "arrivalTime": {
+        "target": "2024-05-10T23:05:00+02:00",
+        "predicted": "2024-05-10T23:05:00+02:00",
+        "diff": 0,
+        "targetTimeInMs": 1715375100000,
+        "predictedTimeInMs": 1715375100000,
+        "timeType": "PREVIEW"
+      }
+    },
+    {
+      "status": "Normal",
+      "arrivalId": "feb6200d-63e8-34ff-a7f2-43ebf813b223",
+      "station": {
+        "evaNo": "8004449",
+        "name": "Norddeich",
+        "position": { "latitude": 53.621579, "longitude": 7.160824 }
+      },
+      "track": { "target": "2", "prediction": "2" },
+      "messages": [],
+      "arrivalTime": {
+        "target": "2024-05-10T23:12:00+02:00",
+        "predicted": "2024-05-10T23:12:00+02:00",
+        "diff": 0,
+        "targetTimeInMs": 1715375520000,
+        "predictedTimeInMs": 1715375520000,
+        "timeType": "PREVIEW"
+      }
+    }
+  ],
+  "started": true,
+  "finished": false,
+  "hims": [
+    {
+      "id": "3",
+      "caption": "Aufzug in Wunstorf auf Gleis 8/9 außer Betrieb.",
+      "shortText": "Aufzug in Wunstorf auf Gleis 8/9 außer Betrieb.",
+      "captionHtml": "Aufzug in Wunstorf auf Gleis 8/9 außer Betrieb.",
+      "shortTextHtml": "Aufzug in Wunstorf auf Gleis 8/9 außer Betrieb."
+    },
+    {
+      "id": "4",
+      "caption": "Aufzug in Nienburg(Weser) Gleis 1/2 außer Betrieb.",
+      "shortText": "Aufzug in Nienburg(Weser) Gleis 1/2 außer Betrieb.",
+      "captionHtml": "Aufzug in Nienburg(Weser) Gleis 1/2 außer Betrieb.",
+      "shortTextHtml": "Aufzug in Nienburg(Weser) Gleis 1/2 außer Betrieb."
+    }
+  ],
+  "validUntil": "2024-05-10T21:17:00.000Z",
+  "validFrom": "2024-05-10T17:14:42.000Z",
+  "isLoyaltyCaseEligible": true,
+  "uic": "508036750729",
+  "trainId": "4430 2024-05-10"
+}

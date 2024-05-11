@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 
 @dataclass(frozen=True)
@@ -23,15 +23,15 @@ class DelayedTime:
             return None
         if real is None:
             real = planned
-        planned_time = datetime.fromtimestamp(planned)
-        real_time = datetime.fromtimestamp(real)
+        planned_time = datetime.fromtimestamp(planned, tz=timezone.utc)
+        real_time = datetime.fromtimestamp(real, tz=timezone.utc)
         return cls(
             planned=planned_time,
             delay=real_time - planned_time,
         )
 
     @classmethod
-    def from_timestamps_ns(cls, planned: int | None, real: int | None):
+    def from_timestamps_ms(cls, planned: int | None, real: int | None):
         return cls.from_timestamps(
             planned // 1000 if planned is not None else planned,
             real // 1000 if real is not None else real,
@@ -65,11 +65,12 @@ class Stop:
             time = str(time_value)
         else:
             time = ""
-        return f"{self.name} " + (f"{self.track} " if self.track else "") + time
+        return f"{self.name} " + (f"[{self.track}] " if self.track else "") + time
 
 
 @dataclass(frozen=True)
 class Status:
+    provider: str
     line: str | None = None
     line_id: str | None = None
     vehicle: str | None = None
@@ -92,7 +93,7 @@ class Status:
             line = ""
 
         if self.next_stop:
-            return f"{line} {self.next_stop}"
+            return f"{line}  {self.next_stop}"
         else:
             dest = f"→ {self.destination} " if self.destination else ""
             speed = f"󰓅 {self.speed:.0f}" if self.speed else ""

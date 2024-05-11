@@ -1,6 +1,14 @@
+import logging
+import socket
+from datetime import datetime
 from functools import lru_cache
-from pyroute2.netlink import nl80211
+
 from pyroute2.iwutil import IW
+from pyroute2.netlink import nl80211
+
+from .types import Stop
+
+_logger = logging.getLogger("waybar-trains")
 
 
 @lru_cache
@@ -18,9 +26,35 @@ def _get_connected_ssids() -> set[str]:
                 continue
             info: list[dict] = attr_bss.get_attrs("NL80211_BSS_INFORMATION_ELEMENTS")
             ssids |= set([d["SSID"].decode("utf-8") for d in info])
+    _logger.debug(f"Found WiFi networks {ssids}")
     return ssids
 
 
 def is_connected_to_ssid(ssids: set[str]):
     # check if connected to train network
     return not ssids.isdisjoint(_get_connected_ssids())
+
+
+def resolve_hostname(host: str) -> str:
+    return socket.getaddrinfo(
+        host=host,
+        port=443,
+        family=socket.AF_INET,
+        proto=socket.IPPROTO_TCP,
+    )[0][4][0]
+
+
+def estimate_next_stop(stops: list[Stop], now: datetime | None = None):
+    if now is None:
+        now = datetime.now().astimezone()
+    next_stop = None
+    for next_stop in stops:
+        if next_stop.departure:
+            stop_time = next_stop.departure
+        elif next_stop.arrival:
+            stop_time = next_stop.arrival
+        else:
+            continue
+        if stop_time.real > now:
+            break
+    return next_stop
