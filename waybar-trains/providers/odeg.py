@@ -9,6 +9,73 @@ from .types import DelayedTime, Status, Stop
 from .utils import is_connected_to_ssid
 
 
+class ODEGProvider(BaseProvider):
+    @property
+    def name(self):
+        return "odeg"
+
+    def _is_connected(self) -> bool:
+        return is_connected_to_ssid({"ODEG Free WiFi"})
+
+    def _fetch_data(self) -> Any:
+        response = requests.post(
+            "https://wasabi.hotspot-local.unwired.at/api/graphql",
+            json={
+                "operationName": "feed_widget",
+                "variables": {
+                    "widget_id": "cc0504a8-8c1d-4898-b7e1-8eb1ca72f3be",
+                    "language": "en",
+                    "user_session_id": "e9fba063-7f3b-4131-adfc-6ce562855be1",
+                },
+                "query": _ODEG_QUERY,
+            },
+        )
+        widget = json.loads(response.json()["data"]["feed_widget"]["widget"]["json"])
+        return widget
+
+    def _get_status_from_data(self, data: Any) -> Status | None:
+        def json_to_stop(stop: dict):
+            # TODO: is stop["track"] always empty or does it sometimes contain the track?
+            return Stop(
+                name=stop["name"],
+                arrival=DelayedTime.from_iso(
+                    stop.get("arrivalPlanned"),
+                    stop.get("arrivalDelay"),
+                ),
+                departure=DelayedTime.from_iso(
+                    stop.get("departurePlanned"),
+                    stop.get("departureDelay"),
+                ),
+            )
+
+        def estimate_next_stop(stops: list[Stop]):
+            now = datetime.now().astimezone()
+            next_stop = None
+            for next_stop in stops:
+                if next_stop.departure:
+                    stop_time = next_stop.departure
+                elif next_stop.arrival:
+                    stop_time = next_stop.arrival
+                else:
+                    continue
+                if stop_time.real > now:
+                    break
+            return next_stop
+
+        data = data["course"]
+
+        stops = [json_to_stop(stop) for stop in data["stops"]]
+        next_stop = estimate_next_stop(stops)
+        return Status(
+            line=data["line"],
+            line_id=data["id"],
+            origin=data["origin"],
+            destination=data["destination"],
+            next_stop=next_stop,
+            stops=stops,
+        )
+
+
 _ODEG_QUERY = """
 query feed_widget($user_session_id: ID, $ap_mac: String, $widget_id: ID!, $language: String) {
   feed_widget(
@@ -173,70 +240,3 @@ fragment PoiMatch on PoiMatch {
   }
   __typename
 }"""
-
-
-class ODEGProvider(BaseProvider):
-    @property
-    def name(self):
-        return "odeg"
-
-    def _is_connected(self) -> bool:
-        return is_connected_to_ssid({"ODEG Free WiFi"})
-
-    def _fetch_data(self) -> Any:
-        response = requests.post(
-            "https://wasabi.hotspot-local.unwired.at/api/graphql",
-            json={
-                "operationName": "feed_widget",
-                "variables": {
-                    "widget_id": "cc0504a8-8c1d-4898-b7e1-8eb1ca72f3be",
-                    "language": "en",
-                    "user_session_id": "e9fba063-7f3b-4131-adfc-6ce562855be1",
-                },
-                "query": _ODEG_QUERY,
-            },
-        )
-        widget = json.loads(response.json()["data"]["feed_widget"]["widget"]["json"])
-        return widget
-
-    def _get_status_from_data(self, data: Any) -> Status | None:
-        def json_to_stop(stop: dict):
-            # TODO: is stop["track"] always empty or does it sometimes contain the track?
-            return Stop(
-                name=stop["name"],
-                arrival=DelayedTime.from_iso(
-                    stop.get("arrivalPlanned"),
-                    stop.get("arrivalDelay"),
-                ),
-                departure=DelayedTime.from_iso(
-                    stop.get("departurePlanned"),
-                    stop.get("departureDelay"),
-                ),
-            )
-
-        def estimate_next_stop(stops: list[Stop]):
-            now = datetime.now().astimezone()
-            next_stop = None
-            for next_stop in stops:
-                if next_stop.departure:
-                    stop_time = next_stop.departure
-                elif next_stop.arrival:
-                    stop_time = next_stop.arrival
-                else:
-                    continue
-                if stop_time.real > now:
-                    break
-            return next_stop
-
-        data = data["course"]
-
-        stops = [json_to_stop(stop) for stop in data["stops"]]
-        next_stop = estimate_next_stop(stops)
-        return Status(
-            line=data["line"],
-            line_id=data["id"],
-            origin=data["origin"],
-            destination=data["destination"],
-            next_stop=next_stop,
-            stops=stops,
-        )
