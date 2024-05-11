@@ -84,20 +84,23 @@ class Status:
 
     def get_text(self):
         if self.line:
-            line = f"󰔬 {self.line} "
+            res = f"󰔬 {self.line} "
         elif self.vehicle and self.line_id:
-            line = f"󰔬 {self.vehicle} {self.line_id} "
+            res = f"󰔬 {self.vehicle} {self.line_id} "
         elif l := self.vehicle or self.line_id:
-            line = f"󰔬 {l} "
+            res = f"󰔬 {l} "
         else:
-            line = ""
+            res = ""
 
         if self.next_stop:
-            return f"{line}  {self.next_stop}"
-        else:
-            dest = f"→ {self.destination} " if self.destination else ""
-            speed = f"󰓅 {self.speed:.0f}" if self.speed else ""
-            return f"{line}{dest}{speed}".strip()
+            res += f"  {self.next_stop} "
+        elif self.destination:
+            res += f"→ {self.destination} "
+
+        if self.speed:
+            res += f"󰓅 {self.speed:.0f}"
+
+        return res.strip()
 
     def get_tooltip(self):
         lines = []
