@@ -47,6 +47,7 @@ class IceportalProvider(BaseProvider):
             timetable = stop["timetable"]
             return Stop(
                 name=station["name"],
+                id=station["evaNr"],
                 arrival=DelayedTime.from_timestamps_ms(
                     timetable["scheduledArrivalTime"],
                     timetable["actualArrivalTime"],
@@ -55,7 +56,7 @@ class IceportalProvider(BaseProvider):
                     timetable["scheduledDepartureTime"],
                     timetable["actualDepartureTime"],
                 ),
-                id=station["evaNr"],
+                track=stop.get("track", {}).get("actual"),
             )
 
         trip = data.trip["trip"]
