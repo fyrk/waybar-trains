@@ -1,23 +1,33 @@
 {
   description = "display information from a train's WiFi network on your Waybar";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+
+  inputs = {
+    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  };
 
   outputs = { nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        python = (pkgs.python312.withPackages (ps: with ps; [
+          requests
+          pyroute2
+        ]));
       in
       {
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            pkgs.bashInteractive
+        packages = {
+          default = pkgs.writeShellApplication {
+            name = "waybar-trains";
+            runtimeInputs = [ python ];
+            text = ''
+              PYTHONPATH="${./.}" "${python}/bin/python" -m waybar-trains "$@"
+            '';
+          };
+        };
 
-            (python312.withPackages (ps: with ps; [
-              requests
-              pyroute2
-            ]))
-          ];
+        devShells.default = pkgs.mkShell {
+          packages = [ python ];
         };
       });
 }
