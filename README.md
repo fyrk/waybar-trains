@@ -6,7 +6,7 @@ It was inspired by https://github.com/e1mo/waybar-iceportal and https://github.c
 
 These operators are currently supported:
 
-| Operator                                                                         | WiFi name        | Description                                                                                                |
+| Operator Portal                                                                  | WiFi name        | Description                                                                                                |
 | -------------------------------------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------- |
 | [Iceportal](https://iceportal.de)                                                | `WIFIonICE`      | German long-distance trains ICE and IC by Deutsche Bahn                                                    |
 | [Zugportal](https://zugportal.de)                                                | `WIFI@DB`        | German regional trains by Deutsche Bahn                                                                    |
@@ -20,7 +20,7 @@ Times include the displayed delay.
 
 ## Configuration example
 
-After cloning and installing the required Python modules (`pip install -r requirements.txt`), run waybar-trains as a Python module with `python -m waybar-trains`.
+After cloning the repository and installing the required Python modules (`pip install -r requirements.txt`), run waybar-trains as a Python module using `python -m waybar-trains`.
 
 Example Waybar module configuration:
 

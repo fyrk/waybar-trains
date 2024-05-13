@@ -42,7 +42,7 @@ class DelayedTime:
         return self.planned + self.delay
 
     def __str__(self):
-        time = self.real.strftime("%H:%M")
+        time = self.real.astimezone().strftime("%H:%M")
         if self.delay:
             return (
                 f"{time} <sup>{int(round(self.delay / timedelta(minutes=1))):+}</sup>"
