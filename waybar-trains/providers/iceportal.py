@@ -1,8 +1,6 @@
 from datetime import datetime
-from typing import NamedTuple
+from typing import Literal, NamedTuple
 from zoneinfo import ZoneInfo
-
-import requests
 
 from .base import BaseProvider, DummyProviderData
 from .types import DelayedTime, Status, Stop
@@ -28,8 +26,8 @@ class IceportalProvider(BaseProvider):
 
     def _fetch_data(self) -> IceportalData:
         return IceportalData(
-            trip=requests.get("https://iceportal.de/api1/rs/tripInfo/trip").json(),
-            status=requests.get("https://iceportal.de/api1/rs/status").json(),
+            trip=self._session.get("https://iceportal.de/api1/rs/tripInfo/trip").json(),
+            status=self._session.get("https://iceportal.de/api1/rs/status").json(),
         )
 
     def _get_dummy_data(self) -> DummyProviderData[IceportalData]:

@@ -5,7 +5,10 @@ import os.path
 from abc import ABC, abstractmethod
 from logging import LoggerAdapter, getLogger
 from pprint import pformat
-from typing import Any, NamedTuple
+from types import NotImplementedType
+from typing import Any, Literal, NamedTuple
+
+import requests
 
 from .types import Status
 from .utils import estimate_next_stop
@@ -16,8 +19,11 @@ _logger = getLogger("waybar-trains")
 class BaseProvider(ABC):
     NAME: str = NotImplemented
 
-    def __init__(self):
+    def __init__(self, session: requests.Session | None = None):
         super().__init__()
+        if session is None:
+            session = requests.Session()
+        self._session = session
         self.logger = ProviderLoggingAdapter(_logger, {"name": self.NAME})
 
     def _is_connected(self) -> bool:
@@ -39,15 +45,41 @@ class BaseProvider(ABC):
     @abstractmethod
     def _get_status_from_data(self, data: Any) -> Status | None: ...
 
-    def get_status(self, conn_check=True) -> Status | None:
+    def attempt_login(
+        self,
+    ) -> (
+        Literal["success"]
+        | Literal["already_logged_in"]
+        | Literal["error"]
+        | NotImplementedType
+    ):
+        return NotImplemented
+
+    def get_status(self, conn_check=True, login=False) -> Status | None:
         """
         tries to fetch provider data, and if successful returns a status string, else None
+        if both `conn_check` and `login` are True, also tries to log in automatically
         """
         try:
             self.logger.info(f"Getting status")
-            if conn_check and not self._is_connected():
-                self.logger.debug("Skipping, not connected to WiFi")
-                return None
+            if conn_check:
+                if not self._is_connected():
+                    self.logger.debug("Skipping, not connected to WiFi")
+                    return None
+                res = "error"
+                try:
+                    res = self.attempt_login()
+                except:
+                    self.logger.exception("Automatic login failed")
+                finally:
+                    if res == NotImplemented:
+                        self.logger.debug("Automatic login not implemented")
+                    elif res == "success":
+                        self.logger.info("Automatic login successful")
+                    elif res == "already_logged_in":
+                        self.logger.debug("Already logged in")
+                    else:
+                        self.logger.warn("Automatic login failed")
             data = self._fetch_data()
             self.logger.debug(f"Got data {pformat(data)}")
             status = self._get_status_from_data(data)
@@ -58,7 +90,7 @@ class BaseProvider(ABC):
                 )
             return status
         except:
-            self.logger.exception(f"Unhandled exception while retrieving status")
+            self.logger.exception("Unhandled exception while retrieving status")
 
     def get_dummy_status(self) -> Status | None:
         data, time = self._get_dummy_data()

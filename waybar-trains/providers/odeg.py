@@ -2,8 +2,6 @@ import json
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-import requests
-
 from .base import BaseProvider, DummyProviderData
 from .types import DelayedTime, Status, Stop
 from .utils import is_connected_to_ssid
@@ -16,7 +14,7 @@ class ODEGProvider(BaseProvider):
         return is_connected_to_ssid({"ODEG Free WiFi"})
 
     def _fetch_data(self) -> dict:
-        response = requests.post(
+        response = self._session.post(
             "https://wasabi.hotspot-local.unwired.at/api/graphql",
             json={
                 "operationName": "feed_widget",

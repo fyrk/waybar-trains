@@ -1,8 +1,6 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-import requests
-
 from .base import BaseProvider, DummyProviderData
 from .types import DelayedTime, Status, Stop
 from .utils import is_connected_to_ssid, resolve_hostname
@@ -21,7 +19,7 @@ class ZugportalProvider(BaseProvider):
         )
 
     def _fetch_data(self) -> dict:
-        return requests.get(
+        return self._session.get(
             "https://zugportal.de/@prd/zupo-travel-information/api/public/ri/journey"
         ).json()
 
