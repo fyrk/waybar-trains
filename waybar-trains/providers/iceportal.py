@@ -77,20 +77,8 @@ class IceportalProvider(BaseProvider):
     def attempt_login(
         self,
     ) -> Literal["success"] | Literal["already_logged_in"] | Literal["error"]:
-        self.logger.debug("cheching if logged in")
-        r = self._session.get("https://login.wifionice.de/en/")
+        r = self._session.post("https://login.wifionice.de/cna/logon", {})
         r.raise_for_status()
-        if "Free online access" not in r.text:
-            return "already_logged_in"
-
-        csrf = self._session.cookies.get("csrf", domain=".login.wifionice.de", path="/")
-        if csrf is None:
-            raise ValueError("csrf cookie not found")
-        self.logger.debug("logging in")
-        r = self._session.post(
-            "https://login.wifionice.de/en/",
-            {"login": "true", "CSRFToken": csrf},
-        )
+        r = self._session.get("https://login.wifionice.de/cna/health/venue")
         r.raise_for_status()
-
-        return "success" if "Free online access" not in r.text else "error"
+        return "success" if r.json()["result"]["healthy"] else "error"
