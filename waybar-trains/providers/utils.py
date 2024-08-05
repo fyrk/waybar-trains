@@ -1,6 +1,6 @@
 import logging
 import socket
-from datetime import datetime
+from datetime import datetime, timedelta
 from functools import lru_cache
 
 from pyroute2.iwutil import IW
@@ -47,14 +47,13 @@ def resolve_hostname(host: str) -> str:
 def estimate_next_stop(stops: list[Stop], now: datetime | None = None):
     if now is None:
         now = datetime.now().astimezone()
-    next_stop = None
-    for next_stop in stops:
-        if next_stop.departure:
-            stop_time = next_stop.departure
-        elif next_stop.arrival:
-            stop_time = next_stop.arrival
-        else:
-            continue
-        if stop_time.real > now:
-            break
-    return next_stop
+    for stop in stops:
+        time = stop.estimated_departure()
+        if time and time.real > now:
+            return stop
+
+    # show last stop for up to 30 minutes after stop's time
+    if stops:
+        time = stops[-1].estimated_departure()
+        if time and time.real + timedelta(minutes=30) > now:
+            return stops[-1]

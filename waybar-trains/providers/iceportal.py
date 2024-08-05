@@ -61,8 +61,14 @@ class IceportalProvider(BaseProvider):
         status = data.status
 
         stops = [json_to_stop(stop) for stop in trip["stops"]]
-        next_stop_id = trip["stopInfo"]["actualNext"]
-        next_stop = next(stop for stop in stops if stop.id == next_stop_id)
+
+        if (next_stop_id := trip["stopInfo"]["actualNext"]) != "":
+            next_stop = next(stop for stop in stops if stop.id == next_stop_id)
+        else:
+            # next stop id might be "" when last stop has been reached
+            # (or if train still provides data from previous trip...)
+            next_stop = None
+
         return Status(
             self.NAME,
             line_id=trip["vzn"],

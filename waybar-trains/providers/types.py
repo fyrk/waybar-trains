@@ -58,6 +58,9 @@ class Stop:
     departure: DelayedTime | None = None
     track: str | None = None
 
+    def estimated_departure(self):
+        return self.departure or self.arrival or None
+
     def __str__(self):
         if self.arrival and self.departure and self.arrival != self.departure:
             time = f"{self.arrival} – {self.departure}"
